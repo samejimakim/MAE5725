@@ -1,0 +1,102 @@
+---
+output:
+    html_document:
+        fig_caption: true
+        highlight: tango
+        number_sections: true
+        theme: cerulean
+        self_contained: yes   
+    pdf_document: default
+--- 
+---
+title: "Aula 2: Resultados Matriciais"   
+author: "Curso Ministrado pela Profa. Dra. Silvia Elian"  
+date: '`r format(Sys.time(), "%d %b, %Y")`'
+  
+---
+   
+<style>
+pre code.bash {
+  background: lightyellow;
+}
+</style> 
+
+[//]: #         includes:
+[//]: #             in_header: mystyles.sty  
+[//]: #  theme ("default", "cerulean", "journal", "flatly", "readable", "spacelab", "united", or "cosmo")   
+[//]: #  unset SSH_ASKPASS
+[//]: #  git config --global credential.helper 'cache --timeout=3600'
+[//]: #  git push -u origin master
+
+
+# Resultados Elementares  
+
+**Notação:**   
+- $A$: Matriz  
+- $A'$: Matriz Transposta  
+- $A^{-1}$: Matriz inversa  
+- $det(A)$ determinante de A  
+- $I_k$ Matriz identidade de ordem k  
+
+## Inversa  
+
+Seja A matriz quadrada. Se existir $A^{-1}$ tal que $AA^{-1}=I$, então $A^{-1}$ é a matriz inversa de A.  
+
+- *(i)* $AA^{-1}=I \Rightarrow A^{-1}A=I$   
+- *(ii)* Se A admite inversa, A é dita não singular(caso contrário, é dita singular)  
+- *(iii)* A inversa, se existir, é única  
+- $\left(A^{-1}\right)^{-1}=A$
+- A e B, matrizes $n\times n$, não singulares $\Rightarrow \left(AB\right)^{-1}=B^{-1}A^{-1}  
+- A não singular, k escalar, $k\ne 0$, então $\left(kA\right)^{-1}=\frac{1}{k}\left(A\right)^{-1}.  
+
+## Transposta  
+
+- A e B tais que existe AB, então (AB)'=B'A'  
+- Se A=A', A é uma matriz simétrica  
+- AA' e A'A são matrizes simétricas.   
+
+## Determinantes  
+
+- A e B matrizes $n\times n$, então $det(AB)=det(A).det(B)$  
+- A matriz $n\times n$, det(A)=0 \Leftrightarrow $ A é singular  
+
+## Posto de uma matriz  
+- Seja A uma matriz $n\times m$. O posto de A é a ordem da "maior" submatriz quadrada não singular de A  
+- *Consequência*: Se A é de posto r, então A contém pelo menos um *menor* $r\times r$ não nulo e nenhum *menor* não nulo de dimensão maior que r.  
+- $A_{n\times m}$. Se $n\gt m$, posto de A é o número de colunas linearmente independentes de A, portanto $p(A)\le m$. $r(A)=m\Rightarrow$ A é de posto completo.  
+- Se $n\lt m$, posto de A é o número de linhas linearmente independentes de A, portanto $r(A)\le n$. $r(A)=n\Rightarrow$ A é de posto completo.  
+
+$$
+A=\left(
+\begin{array}{ccc}
+a_{11} & \dots & a_{1m} \\
+\vdots & \ddots & \vdots \\  
+a_{n1} & \dots & a_{nm}
+\end{array} \right)_{n>m}
+=
+\left( \begin{array}{ccc}
+\underset{\sim}{v_1} & \dots & \underset{\sim}{v_m}
+\end{array} \right)
+$$
+
+**Definição**: Seja $\{ \begin{array}{ccc}
+\underset{\sim}{v_1} & \dots & \underset{\sim}{v_m}
+\end{array} \}$ um conjunto de m vetores cada um com n componentes $\underset{\sim}{v_i}\in \mathbb{R}^n,i=1,...,m$. Este conjunto é linearmente independente se   
+
+$$
+c_1\underset{\sim}{v_1}+...+c_m\underset{\sim}{v_m}=\underset{\sim}{0}\Rightarrow c_1=...=c_m=0
+$$
+
+r(A): Número de colunas independentes de A  
+
+Se  
+
+$$\underset{\sim}{v_m}=\underset{\sim}{v_1}+...+\underset{\sim}{v}_{m-1},\\
+c_1\underset{\sim}{v_1}+...+c_{m-1}\underset{\sim}{v}_{m-1}+c_m(\underset{\sim}{v_1}+...+\underset{\sim}{v}_{m-1})=\\
+(c_1+c_m)\underset{\sim}{v_1}+...+(c_{m-1}+c_m)\underset{\sim}{v}_{m-1}
+=0\\
+\textit{para } c_1=c_2=...=c_{m-1}=-c_{m}
+$$
+Portanto, $\{ \begin{array}{ccc}
+\underset{\sim}{v_1} & \dots & \underset{\sim}{v_m}
+\end{array} \}$ não são l.i. neste caso.
