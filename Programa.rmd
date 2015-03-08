@@ -1,0 +1,51 @@
+---
+output:
+    html_document:
+        fig_caption: true
+        highlight: tango
+        number_sections: true
+        theme: readable
+        self_contained: yes   
+    pdf_document: default
+--- 
+---
+title: "Programa e Bibliografia"   
+author: "Curso Ministrado pela Profa. Dra. Silvia Elian"  
+date: '`r format(Sys.time(), "%d %b, %Y")`'
+  
+---
+   
+<style>
+pre code.bash {
+  background: lightyellow;
+}
+</style> 
+
+[//]: #         includes:
+[//]: #             in_header: mystyles.sty  
+[//]: #  theme ("default", "cerulean", "journal", "flatly", "readable", "spacelab", "united", or "cosmo")   
+[//]: #  unset SSH_ASKPASS
+[//]: #  git config --global credential.helper 'cache --timeout=3600'
+[//]: #  git push -u origin master
+
+
+# Tópicos
+
+1. Introdução e Conceitos Básicos: resultados matriciais, distribuições não centrais, distribuição de formas quadráticas;   
+2. Distribuição Normal Multivariada;   
+3. Modelos Lineares com matriz de planejamento de posto completo;   
+3. Modelos Lineares com matriz de planejamento de posto incompleto;   
+5. Tópicos adicionais.   
+
+# Bibliografia   
+
+- Graybill, F.A. (1976), *Theory and Application of the Linear Model*, Duxbury Press;   
+- Searle, S.R. (1971), *Linear Models*. New York, Wiley;   
+- Rao, C.R. (1973), *Linear Statistical Inference and its Applications*, 2.ed. New York, John Wiley.   
+
+# Bibliografia Complementar   
+- Arnold, S.F. (1981), *The Theory of the Linear Model and Multivariate Analysis*, New York, John Wiley;  
+- Neter, J., Kutner, M.H., Nachtsheim, C.J. and Wasserman (2004), *Applied Linear Statistical Models*, 5.ed., Richard D. Irwin, Inc;   
+- Seber, G.A.F. (1977), *Linear Regression Analysis*, John Wiley and Sons;  
+- Graybill, F.A. (1976), *Matrices and Applictions in Statistics*, 2.ed., Belmont Wadsworth;    
+- Searle, S.R. (1982), *Matrix Algebra useful for Statistics*, New York, John Wiley.   

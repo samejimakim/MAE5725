@@ -1,0 +1,294 @@
+---
+output:
+    html_document:
+        fig_caption: true
+        highlight: tango
+        number_sections: true
+        theme: cerulean
+        self_contained: yes   
+    pdf_document: default
+--- 
+---
+title: "Aula 1: Introdução e Conceitos Básicos"   
+author: "Curso Ministrado pela Profa. Dra. Silvia Elian"  
+date: '`r format(Sys.time(), "%d %b, %Y")`'
+  
+---
+   
+<style>
+pre code.bash {
+  background: lightyellow;
+}
+</style> 
+
+[//]: #         includes:
+[//]: #             in_header: mystyles.sty  
+[//]: #  theme ("default", "cerulean", "journal", "flatly", "readable", "spacelab", "united", or "cosmo")   
+[//]: #  unset SSH_ASKPASS
+[//]: #  git config --global credential.helper 'cache --timeout=3600'
+[//]: #  git push -u origin master
+
+
+# Modelo Linear Geral   
+
+Um *Modelo Linear Geral* é dado por:   
+$$
+Y=\mu(x_1,...,x_n)+\epsilon
+$$   
+em que $Y$ e $\epsilon$ são as variáveis aleatórias. $x_1,...,x_n$ são variáveis não-aleatórias.  $\mu(.)$ é uma função de $x_1,...,x_n$ definida no domínio $\mathcal{D}$ e linear em um conjunto de parâmetros desconhecidos, $\beta_0,\beta_1,...,\beta_n$ pertencentes ao espaço paramétrico $\Omega$.    
+$\epsilon$ é o erro não observável. São feitas suposições sobre sua distribuição de probabilidade.   
+- $\mu(.)$ - parte deterministica   
+- $\epsilon$ - parte aleatória ou estocástica   
+- $Y$ - variável resposta ou variável dependente   
+- $x_1,...,x_n$ - variáveis independentes, preditoras ou explicativas   
+
+A forma de $\mu(x_1,...,x_n)$ será admitida conhecida.   
+
+##Exemplos  
+### Exemplo: Modelo de regressão linear simples(k=1)     
+$$
+\mu(x)=\beta_0+\beta_1 x\\   
+Y=\beta_0+\beta_1 x+\epsilon\\   
+E(\epsilon)=0\\   
+var(\epsilon)=\sigma^2 (desconhecido)
+$$   
+
+### Exemplo: Modelo de regressão linear múltipla(k=3)     
+$$
+\mu(x_1,x_2,x_3)=\beta_0+\beta_1 x_1+\beta_2 x_2+\beta_3 x_3\\   
+Y=\beta_0+\beta_1 x_1+\beta_2 x_2+\beta_3 x_3+\epsilon\\   
+$$   
+
+### Exemplo: Modelo de regressão polinomial(k=3)     
+$$
+\mu(x_1,x_2,x_3)=\beta_0+\beta_1 x+\beta_2 x^2+\beta_3 x^3\\   
+x_1 = x; x_2=x^2; x_3 = x^3\\   
+Y=\beta_0+\beta_1 x+\beta_2 x^2+\beta_3 x^3+\epsilon\\   
+E(\epsilon)=0\\   
+var(\epsilon)=\sigma^2 (desconhecido)
+$$   
+
+### Exemplo   
+$$
+Y=\beta_0+\beta_1 x+\beta_2 e^x+\epsilon\\   
+x_1=x; x_2 = e^x; k=2   
+$$
+
+### Exemplo:   
+$$
+Y=\beta_0+\beta_1 x_1+\beta_2 x_2+\beta_3 x_1 x_2+\epsilon\\   
+x_3=x_1 x_2; k=3   
+$$
+
+## Forma geral   
+$$
+\mu(x_1,...,x_n)=\beta_0+\sum_{j=1}^p q(x_1,...,x_n)\beta_j\\
+Y(\textbf{x})=\mu(\textbf{x})+\epsilon\\
+\textbf{x}=(x_1,...,x_n)\\   
+E(\epsilon(\textbf{x}))=\textbf{0};\textbf{x}\in \mathcal{D}  
+$$   
+*Obs: Este é um modelo populacional. Nenhuma menção foi feita à amostras.*   
+
+O modelo considera a *v.a.* $Y(\textbf{x})$ e portanto a função de distribuição de probabilidades de $Y(\textbf{x})$, $F_{Y(\textbf{x})}(y)$, para $\textbf{x}\in \mathcal{D}$   
+
+## Modelo Linear Geral amostral  
+
+Seja uma amostra de tamanho *n*. O Modelo Linear Geral amostral é dado por:  
+$$
+Y_i=\beta_0+\beta_1 x_{i1}+...+\beta_k x_{ik}+\epsilon_i\\
+E(\epsilon_i)=0;i=1,...,n
+$$   
+
+1- $Y_i$ *v.a.* observável  
+2- $x_{ij}$ variáveis não-aleatórias observáveis pertencentes ao domínio $\mathcal{D}$  
+3- $\beta_j,j=0,...,k$ parâmetros definidos num espaço paramétrico $\Omega$.   
+4- $\epsilon_i$ *v.a.* não-observáveis, com $cov(\epsilon_i,\epsilon_l)=\sigma_{ij},i,l=1,...,n$
+
+## Forma Matricial   
+$$
+\textbf{Y}=X \mathbf{\beta}+\mathbf{\epsilon}
+$$
+em que:  
+- $\textbf{Y}$ é um vetor aleatório observável $n \times 1$    
+- $X$ é uma matriz $n \times (k+1)$ de valores observáveis fixos(os elementos de $X$ não são variáveis aleatórias). $n\gt k+1$  
+- $\mathbf{\beta}$ é um vetor $(k+1) \times n$ de parâmetros desconhecidos definidos em um espaço paramétrico $\Omega_\beta$   
+- $\mathbf{\epsilon}$ é um vetor aleatório não observável com $E(\epsilon)=\textbf{0}$ e  
+$$
+var(\mathbf{\epsilon})=\left(
+\begin{array}{cccc}
+var(\epsilon_1) & cov(\epsilon_1,\epsilon_2) & \dots & cov(\epsilon_1,\epsilon_n)\\  
+cov(\epsilon_2,\epsilon_1) & var(\epsilon_2) & \dots & cov(\epsilon_2,\epsilon_n)\\  
+\vdots & \dots & \ddots & \vdots \\  
+cov(\epsilon_n,\epsilon_1) & \dots & \dots & var(\epsilon_n)  
+\end{array} \right)= \Sigma
+$$
+
+Isto é:   
+
+$$
+\textbf{Y}=\left(
+\begin{array}{c}
+Y_1 \\ Y_2 \\ \vdots\\ Y_n \end{array} \right)
+; X=\left(\begin{array}{cccc}
+1 & X_{11} & \dots & X_{k1}\\
+1 & X_{21} & \dots & X_{k2}\\
+\vdots & \vdots & \ddots & \vdots \\  
+1 & X_{1n} & \dots & X_{kn}
+\end{array} \right)
+; 
+\mathbf{\beta}=\left(\begin{array}{c}
+\beta_0 \\ \beta_1 \\ \vdots \\ \beta_k\end{array}\right)
+; 
+\mathbf{\epsilon}=\left(\begin{array}{c}
+\epsilon_1 \\ \vdots \\ \epsilon_n\end{array}\right)
+$$
+
+*Obs: Este modelo admite vários casos especiais dependendo de:*  
+1- A distribuição de $\epsilon$   
+2- A Estrutura de covariância definida na matriz $\Sigma$   
+3- O posto e a estrutura da matriz $X$   
+
+### Exemplo   
+- $Y$: Pressão sanguínea   
+- $x$: Idade   
+
+$$
+Y=\beta_0+\beta_1 x +\epsilon \\    
+E(\epsilon)=0 ; var(\epsilon)=\sigma (desconhecido); \\   
+50\le x \le 60 : \mathcal{D}(x)=\{x | 50\le x \le 60 \}
+$$   
+Coleção não-enumerável de *v.a.*: $\{Y(\textbf{x})|x\in \mathcal{D}\}$, com distribuição $F_{Y(\textbf{x})}$.  
+**Amostra**: n=6 observações independentes fixadas para $x_1=50;x_2=52;x_3=55,x_4=56;x_5=58; x_6=60$ e observa-se os valores para $Y_1,...,Y_6$   
+
+$$
+Y_i=\beta_0+\beta_1 x_i +\epsilon_i
+$$  
+
+- $\epsilon_i$ *v.a.* independentes $i=1,...,6$.  
+- *Suposição adicional:* $\epsilon_i \sim \mathcal{N}(0,\sigma^2)$  
+- Amostra $\rightarrow$ inferência sobre $\beta_0,\beta_1$ e $\sigma^2$   
+- $Y_{(\textbf{x})} \sim \mathcal{N}(\beta_0+\beta_1 x,\sigma^2)$   
+
+Suponha x=54. Então $Y_{(54)}\sim \mathcal{N}(\beta_0+54\beta_1,\sigma^2)$   
+Podemos estimar a média de $Y_{(54)}$ sem amostrar esta distribuição.   
+$E(Ŷ_{(54)})=b_0+54 b_1$, $b_0$ e $b_1$ estimadores de  $\beta_0$ e $\beta_1$.   
+
+$$
+X=\left(\begin{array}{cc}
+1 & 50\\  
+1 & 52\\  
+1 & 55\\  
+1 & 56\\  
+1 & 58\\  
+1 & 60
+\end{array} \right)
+; 
+\Sigma=\left(
+\begin{array}{cccccc}
+\sigma^2 & 0 & 0 & 0 & 0 & 0 \\
+0 & \sigma^2 & 0 & 0 & 0 & 0 \\
+0 & 0 & \sigma^2 & 0 & 0 & 0 \\
+0 & 0 & 0 & \sigma^2 & 0 & 0 \\
+0 & 0 & 0 & 0 & \sigma^2 & 0 \\
+0 & 0 & 0 & 0 & 0 & \sigma^2 
+\end{array} \right) =\sigma^2 I_6
+$$
+
+**Nota sobre a natureza de $X_1,...,X_k$**   
+- *Quantitativas:* Modelo de Regressão  
+- *Qualitativas:* Modelo de análise de variância   
+
+### Exemplo   
+
+$$
+Y_{ij} = \mu_i + \epsilon_{ij}; E(\epsilon_{ij})\\  
+i=1,2\textbf{, para sexo}; j=1,2,3\textbf{, para indivíduo} \\  
+\mu_1: \textbf{Pressão média dos homens}\\   
+\mu_2: \textbf{Pressão média das mulheres}\\   
+\textbf{Y}=X \mathbf{\beta}+\mathbf{\epsilon}
+$$
+$$
+\left(\begin{array}{c}
+Y_{11} \\  
+Y_{12} \\  
+Y_{13} \\  
+Y_{14} \\  
+Y_{15} \\  
+Y_{16} 
+\end{array} \right)
+=
+\left(\begin{array}{cc}
+1 & 0\\  
+1 & 0\\  
+1 & 0\\  
+0 & 1\\  
+0 & 1\\  
+0 & 1
+\end{array} \right).
+\left(\begin{array}{c}
+\mu_{1} \\  
+\mu_{2} 
+\end{array}
+\right)
++
+\left(\begin{array}{c}
+\epsilon_{11} \\  
+\epsilon_{12} \\  
+\epsilon_{13} \\  
+\epsilon_{21} \\  
+\epsilon_{22} \\  
+\epsilon_{23} 
+\end{array} \right) \textit{ "Modelo com 2 parâmetros"}
+$$
+
+*Objetivo*: Estimar $\mu_1$ e $\mu_2$, testar $\mu_1=\mu_2$.  
+
+Podemos ainda escrever o modelo na forma:   
+$$
+\mu_i=\mu + \mathcal{T}_i,i=1,2
+$$
+
+- $\mu$: Média geral  
+- $\mathcal{T}_i$: Efeito de Sexo  
+
+$$
+Y_{ij} = \mu +\mathcal{T}_i + \epsilon_{ij}\\  
+\left(\begin{array}{c}
+Y_{11} \\  
+Y_{12} \\  
+Y_{13} \\  
+Y_{21} \\  
+Y_{22} \\  
+Y_{23} 
+\end{array} \right)
+=
+\left(\begin{array}{ccc}
+1 & 1 & 0\\  
+1 & 1 & 0\\  
+1 & 1 & 0\\  
+0 & 0 & 1\\  
+0 & 0 & 1\\  
+0 & 0 & 1
+\end{array} \right).
+\left(\begin{array}{c}
+\mu \\  
+\mathcal{T}_1\\  
+\mathcal{T}_2  
+\end{array}
+\right)
++
+\left(\begin{array}{c}
+\epsilon_{11} \\  
+\epsilon_{12} \\  
+\epsilon_{13} \\  
+\epsilon_{21} \\  
+\epsilon_{22} \\  
+\epsilon_{23} 
+\end{array} \right) \textit{ "Modelo com 3 parâmetros"}
+$$  
+
+$\mu+\mathcal{T}_i$: Diferente forma de escrever $\mu_i$   
+$X_{6\times 3}$ tem posto 2 - Número de colunas linearmente independentes. Matriz de posto incompleto.  
+No caso anterior, $X_{6\times 2}$ tem posto 2 e é de posto completo.  
+Nos dois casos, $X$ é qualitativa. Nos modelos de ANOVA, a matriz $X$ contém somente 'zeros'e 'uns' e apresenta padrões específicos de acordo com o particular planejamento.  
+Definido o Modelo Linear Geral, faremos inferência sobre $\mathbf{\beta}$ para modelos de posto completo e incompleto.  
